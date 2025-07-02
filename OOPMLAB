@@ -1,0 +1,517 @@
+1. First 10 program :-
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class NumberOperations {
+public:
+    void checkOddEven(int n) {
+        if (n % 2 == 0)
+            cout << n << " is Even\n";
+        else
+            cout << n << " is Odd\n";
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void checkPrime(int n) {
+        if (n <= 1) {
+            cout << n << " is not Prime\n";
+            return;
+        }
+        for (int i = 2; i <= sqrt(n); i++) {
+            if (n % i == 0) {
+                cout << n << " is not Prime\n";
+                return;
+            }
+        }
+        cout << n << " is Prime\n";
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void checkArmstrong(int n) {
+        int original = n, sum = 0;
+        int digits = to_string(n).length();
+        while (n > 0) {
+            int digit = n % 10;
+            sum += pow(digit, digits);
+            n /= 10;
+        }
+        if (sum == original)
+            cout << original << " is an Armstrong number\n";
+        else
+            cout << original << " is not an Armstrong number\n";
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void checkPalindrome(int n) {
+        int original = n, rev = 0;
+        while (n > 0) {
+            rev = rev * 10 + n % 10;
+            n /= 10;
+        }
+        if (rev == original)
+            cout << original << " is a Palindrome\n";
+        else
+            cout << original << " is not a Palindrome\n";
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void fibonacci(int terms) {
+        int a = 0, b = 1;
+        cout << "Fibonacci Series: ";
+        for (int i = 0; i < terms; ++i) {
+            cout << a << " ";
+            int temp = a + b;
+            a = b;
+            b = temp;
+        }
+        cout << endl;
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void factorial(int n) {
+        long long fact = 1;
+        for (int i = 2; i <= n; i++)
+            fact *= i;
+        cout << "Factorial of " << n << " is " << fact << endl;
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void checkLeapYear(int year) {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+            cout << year << " is a Leap Year\n";
+        else
+            cout << year << " is not a Leap Year\n";
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void simpleAndCompoundInterest(double p, double r, double t) {
+        double si = (p * r * t) / 100;
+        double ci = p * pow((1 + r / 100), t) - p;
+        cout << "Simple Interest: " << si << endl;
+        cout << "Compound Interest: " << ci << endl;
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void fahrenheitToCelsius(float f) {
+        float c = (f - 32) * 5 / 9;
+        cout << f << " Fahrenheit = " << c << " Celsius\n";
+    }
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+    void greaterOrSmaller(int a, int b) {
+        if (a > b)
+            cout << a << " is greater than " << b << endl;
+        else if (a < b)
+            cout << a << " is smaller than " << b << endl;
+        else
+            cout << a << " is equal to " << b << endl;
+    }
+};
+
+int main() {
+    NumberOperations obj;
+
+    obj.checkOddEven(7);
+    obj.checkPrime(29);
+    obj.checkArmstrong(153);
+    obj.checkPalindrome(121);
+    obj.fibonacci(10);
+    obj.factorial(5);
+    obj.checkLeapYear(2024);
+    obj.simpleAndCompoundInterest(1000, 5, 2);
+    obj.fahrenheitToCelsius(98.6);
+    obj.greaterOrSmaller(15, 20);
+
+    return 0;
+}
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+2.  OOP program for a banking system as per your requirements:
+Constructor takes account holder's name.
+Balance is maintained.
+Functions for deposit and withdrawal.
+Withdrawal not allowed if amount > balance.
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+private:
+    string name;
+    double balance;
+
+public:
+    BankAccount(string holderName) {
+        name = holderName;
+        balance = 0.0;
+    }
+
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposited: " << amount << endl;
+        } else {
+            cout << "Invalid deposit amount\n";
+        }
+    }
+
+    void withdraw(double amount) {
+        if (amount > balance) {
+            cout << "Withdrawal failed. Insufficient balance.\n";
+        } else if (amount <= 0) {
+            cout << "Invalid withdrawal amount\n";
+        } else {
+            balance -= amount;
+            cout << "Withdrawn: " << amount << endl;
+        }
+    }
+
+    void displayBalance() {
+        cout << "Account Holder: " << name << endl;
+        cout << "Current Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    BankAccount acc1("Soumojit");
+
+    acc1.deposit(1000);
+    acc1.displayBalance();
+
+    acc1.withdraw(500);
+    acc1.displayBalance();
+
+    acc1.withdraw(600);
+    acc1.displayBalance();
+
+    return 0;
+}
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+3. Single inheritance
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+normal: 
+
+#include <iostream>
+using namespace std;
+
+class Vehicle {
+public:
+    void start() {
+        cout << "Vehicle is starting\n";
+    }
+};
+
+class Car : public Vehicle {
+public:
+    void drive() {
+        cout << "Car is driving\n";
+    }
+};
+
+int main() {
+    Car obj;
+    obj.start();
+    obj.drive();
+    return 0;
+}
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+4. Multilevel inheritance
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+normal:
+
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    void showName() {
+        cout << "Name: John\n";
+    }
+};
+
+class Employee : public Person {
+public:
+    void showSalary() {
+        cout << "Salary: 50,000\n";
+    }
+};
+
+class Manager : public Employee {
+public:
+    void showDepartment() {
+        cout << "Department: HR\n";
+    }
+};
+
+int main() {
+    Manager m;
+    m.showName();
+    m.showSalary();
+    m.showDepartment();
+    return 0;
+}
+
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+5. Multiple inheritance
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+normal:
+
+#include <iostream>
+using namespace std;
+
+class Printer {
+public:
+    void print() {
+        cout << "Printing document...\n";
+    }
+};
+
+class Scanner {
+public:
+    void scan() {
+        cout << "Scanning document...\n";
+    }
+};
+
+class MultiFunctionDevice : public Printer, public Scanner {
+public:
+    void fax() {
+        cout << "Sending fax...\n";
+    }
+};
+
+int main() {
+    MultiFunctionDevice mfd;
+    mfd.print();
+    mfd.scan();
+    mfd.fax();
+    return 0;
+}
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+6. Hierarchial Inheritance
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+normal:
+
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    void showInfo() {
+        cout << "Student Information\n";
+    }
+};
+
+class EngineeringStudent : public Student {
+public:
+    void showBranch() {
+        cout << "Branch: Computer Science\n";
+    }
+};
+
+class MedicalStudent : public Student {
+public:
+    void showField() {
+        cout << "Field: Medicine\n";
+    }
+};
+
+int main() {
+    EngineeringStudent eng;
+    MedicalStudent med;
+
+    eng.showInfo();
+    eng.showBranch();
+
+    med.showInfo();
+    med.showField();
+
+    return 0;
+}
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+7. Hybrid Inheritance:
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+normal:
+
+#include <iostream>
+using namespace std;
+
+class Employee {
+public:
+    void empDetails() {
+        cout << "General Employee Details\n";
+    }
+};
+
+class PartTime : public Employee {
+public:
+    void partTimeHours() {
+        cout << "Works 20 hours/week\n";
+    }
+};
+
+class FullTime {
+public:
+    void fullTimeHours() {
+        cout << "Works 40 hours/week\n";
+    }
+};
+
+class Developer : public PartTime, public FullTime {
+public:
+    void workRole() {
+        cout << "Role: Developer\n";
+    }
+};
+
+int main() {
+    Developer d;
+    d.empDetails();      // from Employee via PartTime
+    d.partTimeHours();   // from PartTime
+    d.fullTimeHours();   // from FullTime
+    d.workRole();        // from Developer
+    return 0;
+}
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+8. Contructor Overloading:
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+EXAMPLE 1: 
+
+#include <iostream>
+using namespace std;
+
+class Person {
+protected:
+    string name;
+public:
+    Person(string n) {
+        name = n;
+        cout << "Person constructor called\n";
+    }
+    void displayPerson() {
+        cout << "Name: " << name << endl;
+    }
+};
+
+class Student : public Person {
+private:
+    int roll;
+public:
+    Student(string n, int r) : Person(n) {
+        roll = r;
+        cout << "Student constructor called\n";
+    }
+    void displayStudent() {
+        cout << "Roll: " << roll << endl;
+    }
+};
+
+int main() {
+    Student s("Soumojit", 101);
+    s.displayPerson();
+    s.displayStudent();
+    return 0;
+}
+
+EXAMPLE 2:
+
+#include <iostream>
+using namespace std;
+
+class Person {
+protected:
+    string name;
+public:
+    Person(string n) {
+        name = n;
+        cout << "Person constructor called\n";
+    }
+    void showPerson() {
+        cout << "Name: " << name << endl;
+    }
+};
+
+class Job {
+protected:
+    string role;
+public:
+    Job(string r) {
+        role = r;
+        cout << "Job constructor called\n";
+    }
+    void showJob() {
+        cout << "Role: " << role << endl;
+    }
+};
+
+class Employee : public Person, public Job {
+private:
+    int id;
+public:
+    Employee(string n, string r, int i) : Person(n), Job(r) {
+        id = i;
+        cout << "Employee constructor called\n";
+    }
+    void showEmployee() {
+        cout << "Employee ID: " << id << endl;
+    }
+};
+
+int main() {
+    Employee e("Soumojit", "Developer", 101);
+    e.showPerson();
+    e.showJob();
+    e.showEmployee();
+    return 0;
+}
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+Virtual Class: 
+
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    void identify() {
+        cout << "I am a person\n";
+    }
+};
+
+class Employee : virtual public Person {
+public:
+    void work() {
+        cout << "I am working\n";
+    }
+};
+
+class Student : virtual public Person {
+public:
+    void study() {
+        cout << "I am studying\n";
+    }
+};
+
+class WorkingStudent : public Employee, public Student {
+public:
+    void describe() {
+        identify(); // No ambiguity
+        work();
+        study();
+    }
+};
+
+int main() {
+    WorkingStudent ws;
+    ws.describe();
+    return 0;
+}
+
